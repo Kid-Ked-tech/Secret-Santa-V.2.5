@@ -112,7 +112,7 @@
             if (flavorToUsername[flavor]) {
                 const realUsername = flavorToUsername[flavor];
                 const secretSanta = pairings[realUsername];
-                resultDiv.innerHTML = `Your Secret Santa is: ${secretSanta}`;
+                resultDiv.innerHTML = `Your Secret Santa to: ${secretSanta}`;
             } else {
                 errorDiv.innerHTML = 'Flavor not found. Please try again.';
             }
