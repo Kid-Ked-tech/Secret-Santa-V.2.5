@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secret Santa Pairings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://www.w3schools.com/w3images/forest.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 50px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #ffcc00;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            max-width: 300px;
+            border: 2px solid #ffcc00;
+            border-radius: 5px;
+            background: #fff;
+            color: #333;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffcc00;
+            color: #333;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #e6b800;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #00ff00;
+        }
+        .error {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ff6666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Secret Santa Pairings</h1>
+        <form id="santaForm">
+            <label for="flavor">Enter your flavor (anonymous name):</label><br>
+            <input type="text" id="flavor" name="flavor" required><br>
+            <input type="submit" value="Find Secret Santa">
+        </form>
+        <div class="result" id="result"></div>
+        <div class="error" id="error"></div>
+    </div>
+
+    <script>
+        // Mapping of anonymous names (flavors) to real usernames
+        const flavorToUsername = {
+            "Vanilla": "Beck",
+            "Chocolate": "Dan",
+            "Strawberry": "Derrick",
+            "Mint": "Sylvia",
+            "Caramel": "Rita",
+            "Lemon": "Racheal",
+            "Coffee": "Alex",
+            "Hazelnut": "Vally",
+            "Blueberry": "Mom",
+            "Peanut Butter": "Dad",
+            "Pistachio": "Diana"
+        };
+
+        // Mapping of real usernames to their Secret Santa assignments
+        const pairings = {
+            "Beck": "Dianah",
+            "Dan": "Derrick",
+            "Derrick": "Alex",
+            "Sylvia": "Becky",
+            "Rita": "Racheal",
+            "Racheal": "Ritah",
+            "Alex": "Mom",
+            "Vally": "Sylvia",
+            "Mom": "Vally",
+            "Dad": "Dan",
+            "Diana": "Dad"
+        };
+
+        document.getElementById('santaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const flavor = document.getElementById('flavor').value.trim();
+            const resultDiv = document.getElementById('result');
+            const errorDiv = document.getElementById('error');
+            resultDiv.innerHTML = '';
+            errorDiv.innerHTML = '';
+
+            if (flavorToUsername[flavor]) {
+                const realUsername = flavorToUsername[flavor];
+                const secretSanta = pairings[realUsername];
+                resultDiv.innerHTML = `Your Secret Santa is: ${secretSanta}`;
+            } else {
+                errorDiv.innerHTML = 'Flavor not found. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html>
