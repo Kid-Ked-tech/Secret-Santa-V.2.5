@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: url('https://i.imgur.com/ktG0F3N.jpg') no-repeat center center fixed; /* Presenty background */
+            background: url('https://i.imgur.com/lhYIlBp.jpg') no-repeat center center fixed; /* Christmas tree with gifts background */
             background-size: cover;
             color: #fff;
             text-align: center;
@@ -17,12 +17,6 @@
             flex-direction: column;
             justify-content: center;
             min-height: 100vh;
-            animation: fadeIn 2s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .container {
@@ -32,29 +26,10 @@
             margin: 0 auto;
             width: 80%;
             max-width: 600px;
-            animation: slideIn 1s ease-in-out;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); }
-            to { transform: translateY(0); }
         }
 
         h1 {
             color: #ffcc00;
-            animation: bounce 1.5s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
         }
 
         input[type="text"] {
@@ -66,13 +41,6 @@
             border-radius: 5px;
             background: #fff;
             color: #333;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(255, 204, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
         }
 
         input[type="submit"] {
@@ -84,43 +52,34 @@
             color: #333;
             font-size: 16px;
             cursor: pointer;
-            animation: grow 0.3s ease-in-out;
         }
 
         input[type="submit"]:hover {
             background-color: #e6b800;
-            animation: shrink 0.3s ease-in-out;
-        }
-
-        @keyframes grow {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
-        }
-
-        @keyframes shrink {
-            from { transform: scale(1.05); }
-            to { transform: scale(1); }
         }
 
         .result {
             margin-top: 20px;
-            font-size: 1.2em;
+            font-size: 1.5em;
             color: #00ff00;
-            animation: fadeIn 2s ease-in;
+            animation: sparkle 1.5s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00, 0 0 40px #ffcc00; }
+            50% { text-shadow: 0 0 20px #ffff00, 0 0 30px #ffff00, 0 0 40px #ffff00, 0 0 50px #ffff00; }
         }
 
         .error {
             margin-top: 20px;
             font-size: 1.2em;
             color: #ff6666;
-            animation: fadeIn 2s ease-in;
         }
 
         .footer {
             margin-top: 20px;
             font-size: 0.9em;
             color: #fff;
-            animation: fadeIn 2s ease-in;
             position: absolute;
             bottom: 10px;
             width: 100%;
@@ -186,7 +145,7 @@
             if (flavorToUsername[flavor]) {
                 const realUsername = flavorToUsername[flavor];
                 const secretSanta = pairings[realUsername];
-                resultDiv.innerHTML = `Your Secret Santa is: ${secretSanta}`;
+                resultDiv.innerHTML = `You are Secret Santa to: ${secretSanta}`;
             } else {
                 errorDiv.innerHTML = 'Flavor not found. Please try again.';
             }
