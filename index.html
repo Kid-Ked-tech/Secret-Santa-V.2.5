@@ -24,12 +24,19 @@
       padding: 30px;
       border-radius: 15px;
       width: 90%;
-      max-width: 450px;
+      max-width: 500px;
     }
 
     h1 {
-      font-size: 2.2rem;
-      margin-bottom: 10px;
+      font-size: 2.5rem;
+      margin-bottom: 5px;
+    }
+
+    .dress-code {
+      font-size: 1rem;
+      margin: 10px 0 20px;
+      color: #ffe6e6;
+      line-height: 1.6;
     }
 
     select, button {
@@ -71,7 +78,6 @@
       color: #ffffffb3;
     }
 
-    /* Snowflake styling */
     .snowflake {
       position: fixed;
       top: -10px;
@@ -92,6 +98,15 @@
 <body>
   <div class="container">
     <h1>🎄 Secret Santa 2025 🎁</h1>
+    <div class="dress-code">
+      <strong>By Derr1ckEmma</strong><br><br>
+      <strong>Dress Code:</strong><br>
+      Black as the main lead,<br>
+      and add either <span style="color: #ff6666;">Red</span>, 
+      <span style="color: #ffe066;">Yellow</span>, or 
+      <span style="color: #ffb6c1;">Peach</span>.
+    </div>
+
     <p>Select your <strong>codename</strong> to reveal who you're gifting to:</p>
 
     <select id="codenameSelect">
@@ -118,9 +133,8 @@
     <div id="countdown"></div>
   </div>
 
-  <footer>✨ Developed with joy by KidKed, 2025</footer>
+  <footer>✨ Made with love by Derr1ckEmma</footer>
 
-  <!-- Optional chime -->
   <audio id="chime" preload="auto">
     <source src="https://github.com/anars/blank-audio/raw/master/1-second-of-silence.mp3" type="audio/mpeg">
   </audio>
