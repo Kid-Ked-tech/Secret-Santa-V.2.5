@@ -4,31 +4,47 @@
   <meta charset="UTF-8">
   <title>Secret Santa 2025</title>
   <style>
-    body {
+    html, body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #0b1a2a, #1e3c58);
-      color: #fff;
-      text-align: center;
-      min-height: 100vh;
-      background-image: url('https://images.unsplash.com/photo-1608889173600-e79fdd65ef9b');
-      background-size: cover;
-      background-position: center;
+      padding: 0;
+      height: 100%;
+      background: linear-gradient(135deg, #b30000, #ffcc70);
       background-attachment: fixed;
-      overflow-x: hidden;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      overflow: hidden;
     }
     .container {
-      margin-top: 10vh;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 90vh;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.55);
+      margin: auto;
       border-radius: 15px;
-      display: inline-block;
+      padding: 30px;
+      max-width: 90vw;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
     }
     select, button {
       margin: 15px;
-      padding: 10px;
+      padding: 12px;
       font-size: 16px;
-      border-radius: 5px;
+      border-radius: 6px;
+      border: none;
+      background: #fff;
+      color: #b30000;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #ffe6e6;
+      cursor: pointer;
     }
     .reveal-text {
       margin-top: 20px;
@@ -36,20 +52,23 @@
       animation: shimmer 2s infinite;
     }
     @keyframes shimmer {
-      0% { color: #f0e; }
-      50% { color: #ff0; }
-      100% { color: #f0e; }
+      0% { color: #fff; }
+      50% { color: #ffe066; }
+      100% { color: #fff; }
     }
     footer {
-      margin-top: 30px;
-      color: #ddd;
+      text-align: center;
+      padding: 10px;
+      color: #fff9;
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
     }
     #countdown {
       font-size: 18px;
-      color: #fffa;
       margin-top: 15px;
+      color: #fffa;
     }
-    /* Snowfall */
     .snowflake {
       position: fixed;
       top: -10px;
@@ -67,87 +86,84 @@
   </style>
 </head>
 <body>
+
   <div class="container">
-    <h1>✨ Secret Santa 2025 ✨</h1>
-    <p>Select your name to reveal who you're gifting!</p>
-    <select id="nameSelect">
-      <option value="">-- Choose Your Name --</option>
-      <option value="Jemima">Jemima</option>
-      <option value="Jathniel">Jathniel</option>
-      <option value="Malaika">Malaika</option>
-      <option value="Valerie">Valerie</option>
-      <option value="Derrick">Derrick</option>
-      <option value="Sylvia">Sylvia</option>
-      <option value="Dianah">Dianah</option>
-      <option value="Daniel">Daniel</option>
-      <option value="Ritah">Ritah</option>
-      <option value="Racheal">Racheal</option>
-      <option value="Rebecca">Rebecca</option>
-      <option value="Vally">Vally</option>
-      <option value="Alex">Alex</option>
-      <option value="Mom">Mom</option>
-      <option value="Dad">Dad</option>
+    <h1>🎄 Secret Santa 2025 🎄</h1>
+    <p>Select your **codename** to reveal who you’re gifting to!</p>
+    <select id="codeSelect">
+      <option value="">-- Choose Your Codename --</option>
+      <option value="Icy Bell">Icy Bell</option>
+      <option value="Frosty Comet">Frosty Comet</option>
+      <option value="Sugar Pine">Sugar Pine</option>
+      <option value="Winter Whisper">Winter Whisper</option>
+      <option value="Snow Echo">Snow Echo</option>
+      <option value="Midnight Ember">Midnight Ember</option>
+      <option value="Northern Glow">Northern Glow</option>
+      <option value="Twinkle Fern">Twinkle Fern</option>
+      <option value="Silent Star">Silent Star</option>
+      <option value="Blitzen Flare">Blitzen Flare</option>
+      <option value="Cinnamon Frost">Cinnamon Frost</option>
+      <option value="Silver Fir">Silver Fir</option>
+      <option value="Star Drift">Star Drift</option>
+      <option value="Glimmer Birch">Glimmer Birch</option>
+      <option value="Crystal Owl">Crystal Owl</option>
     </select>
-    <button onclick="revealGiftee()">Reveal My Giftee</button>
+    <button onclick="revealRealName()">Reveal</button>
     <div id="result" class="reveal-text"></div>
     <div id="countdown"></div>
   </div>
 
   <footer>Crafted with ✨ by KidKed, 2025</footer>
-
-  <!-- Sound Effect -->
   <audio id="chime" preload="auto">
     <source src="https://github.com/anars/blank-audio/raw/master/1-second-of-silence.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    const pairings = {
-      "Jemima": "Icy Bell",
-      "Jathniel": "Frosty Comet",
-      "Malaika": "Sugar Pine",
-      "Valerie": "Winter Whisper",
-      "Derrick": "Snow Echo",
-      "Sylvia": "Midnight Ember",
-      "Dianah": "Northern Glow",
-      "Daniel": "Twinkle Fern",
-      "Ritah": "Silent Star",
-      "Racheal": "Blitzen Flare",
-      "Rebecca": "Cinnamon Frost",
-      "Vally": "Silver Fir",
-      "Alex": "Star Drift",
-      "Mom": "Glimmer Birch",
-      "Dad": "Crystal Owl"
+    const reversePairings = {
+      "Icy Bell": "Jemima",
+      "Frosty Comet": "Jathniel",
+      "Sugar Pine": "Malaika",
+      "Winter Whisper": "Valerie",
+      "Snow Echo": "Derrick",
+      "Midnight Ember": "Sylvia",
+      "Northern Glow": "Dianah",
+      "Twinkle Fern": "Daniel",
+      "Silent Star": "Ritah",
+      "Blitzen Flare": "Racheal",
+      "Cinnamon Frost": "Rebecca",
+      "Silver Fir": "Vally",
+      "Star Drift": "Alex",
+      "Glimmer Birch": "Mom",
+      "Crystal Owl": "Dad"
     };
 
-    function revealGiftee() {
-      const name = document.getElementById("nameSelect").value;
+    function revealRealName() {
+      const codename = document.getElementById("codeSelect").value;
       const result = document.getElementById("result");
       const chime = document.getElementById("chime");
 
-      if (!name) {
-        result.innerHTML = "";
-        return;
-      }
+      if (!codename) return result.innerHTML = "";
 
-      const alreadySeen = localStorage.getItem("santa_" + name);
-      if (alreadySeen) {
-        result.innerHTML = `🎁 You already revealed your giftee: <strong>${alreadySeen}</strong>`;
+      const already = localStorage.getItem("reveal_" + codename);
+      const realName = reversePairings[codename];
+
+      if (already) {
+        result.innerHTML = `🎁 You are gifting to: <strong>${already}</strong>`;
       } else {
-        const codename = pairings[name];
-        result.innerHTML = `🎁 You are Secret Santa to: <strong>${codename}</strong>`;
+        result.innerHTML = `🎁 You are gifting to: <strong>${realName}</strong>`;
         chime.play();
-        localStorage.setItem("santa_" + name, codename);
+        localStorage.setItem("reveal_" + codename, realName);
       }
     }
 
-    // 🎄 Countdown Timer
+    // Countdown
     function updateCountdown() {
       const now = new Date();
       const xmas = new Date("December 25, 2025 00:00:00");
       const diff = xmas - now;
 
       if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "🎄 Merry Christmas!";
+        document.getElementById("countdown").innerHTML = "🎁 Merry Christmas!";
         return;
       }
 
@@ -159,26 +175,22 @@
       document.getElementById("countdown").innerHTML =
         `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s until Christmas!`;
     }
-
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // ❄️ Snow Generator
+    // Snowfall
     function createSnowflake() {
-      const snowflake = document.createElement("div");
-      snowflake.classList.add("snowflake");
-      snowflake.textContent = "❄️";
-      snowflake.style.left = Math.random() * 100 + "vw";
-      snowflake.style.animationDuration = (Math.random() * 3 + 2) + "s";
-      snowflake.style.fontSize = (Math.random() * 10 + 10) + "px";
-      document.body.appendChild(snowflake);
-
-      setTimeout(() => {
-        snowflake.remove();
-      }, 5000);
+      const flake = document.createElement("div");
+      flake.classList.add("snowflake");
+      flake.textContent = "❄️";
+      flake.style.left = Math.random() * 100 + "vw";
+      flake.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      flake.style.fontSize = (Math.random() * 10 + 10) + "px";
+      document.body.appendChild(flake);
+      setTimeout(() => flake.remove(), 5000);
     }
-
     setInterval(createSnowflake, 300);
   </script>
+
 </body>
 </html>
