@@ -7,77 +7,81 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
-      background: linear-gradient(135deg, #b30000, #ffcc70);
-      background-attachment: fixed;
-      background-size: cover;
       font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top left, #d7373f, #740404);
       color: #fff;
-      overflow: hidden;
-    }
-    .container {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 90vh;
       text-align: center;
-      background: rgba(0, 0, 0, 0.55);
-      margin: auto;
-      border-radius: 15px;
-      padding: 30px;
-      max-width: 90vw;
+      overflow-x: hidden;
     }
+
+    .container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 450px;
+    }
+
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       margin-bottom: 10px;
     }
+
     select, button {
       margin: 15px;
       padding: 12px;
       font-size: 16px;
-      border-radius: 6px;
+      border-radius: 8px;
       border: none;
-      background: #fff;
-      color: #b30000;
-      font-weight: bold;
     }
-    button:hover {
-      background: #ffe6e6;
+
+    button {
+      background-color: #ffd700;
+      color: #000;
+      font-weight: bold;
       cursor: pointer;
     }
+
     .reveal-text {
       margin-top: 20px;
       font-size: 24px;
       animation: shimmer 2s infinite;
     }
+
     @keyframes shimmer {
-      0% { color: #fff; }
-      50% { color: #ffe066; }
-      100% { color: #fff; }
+      0% { color: #ffebcd; }
+      50% { color: #fff700; }
+      100% { color: #ffebcd; }
     }
+
     footer {
-      text-align: center;
-      padding: 10px;
-      color: #fff9;
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #ccc;
     }
+
     #countdown {
-      font-size: 18px;
-      margin-top: 15px;
-      color: #fffa;
+      margin-top: 10px;
+      font-size: 16px;
+      color: #ffffffb3;
     }
+
+    /* Snowflake styling */
     .snowflake {
       position: fixed;
       top: -10px;
-      color: #fff;
       font-size: 1em;
+      color: #fff;
       user-select: none;
-      z-index: 9999;
       animation: fall linear infinite;
+      z-index: 999;
     }
+
     @keyframes fall {
       to {
         transform: translateY(100vh);
@@ -86,111 +90,117 @@
   </style>
 </head>
 <body>
-
   <div class="container">
-    <h1>🎄 Secret Santa 2025 🎄</h1>
-    <p>Select your **codename** to reveal who you’re gifting to!</p>
-    <select id="codeSelect">
+    <h1>🎄 Secret Santa 2025 🎁</h1>
+    <p>Select your <strong>codename</strong> to reveal who you're gifting to:</p>
+
+    <select id="codenameSelect">
       <option value="">-- Choose Your Codename --</option>
+      <option value="Crystal Owl">Crystal Owl</option>
       <option value="Icy Bell">Icy Bell</option>
-      <option value="Frosty Comet">Frosty Comet</option>
-      <option value="Sugar Pine">Sugar Pine</option>
+      <option value="Glimmer Birch">Glimmer Birch</option>
       <option value="Winter Whisper">Winter Whisper</option>
-      <option value="Snow Echo">Snow Echo</option>
       <option value="Midnight Ember">Midnight Ember</option>
-      <option value="Northern Glow">Northern Glow</option>
-      <option value="Twinkle Fern">Twinkle Fern</option>
+      <option value="Snow Echo">Snow Echo</option>
       <option value="Silent Star">Silent Star</option>
-      <option value="Blitzen Flare">Blitzen Flare</option>
-      <option value="Cinnamon Frost">Cinnamon Frost</option>
+      <option value="Sugar Pine">Sugar Pine</option>
+      <option value="Frosty Comet">Frosty Comet</option>
+      <option value="Northern Glow">Northern Glow</option>
       <option value="Silver Fir">Silver Fir</option>
       <option value="Star Drift">Star Drift</option>
-      <option value="Glimmer Birch">Glimmer Birch</option>
-      <option value="Crystal Owl">Crystal Owl</option>
+      <option value="Twinkle Fern">Twinkle Fern</option>
+      <option value="Blitzen Flare">Blitzen Flare</option>
+      <option value="Cinnamon Frost">Cinnamon Frost</option>
     </select>
-    <button onclick="revealRealName()">Reveal</button>
+
+    <button onclick="revealGiftee()">Reveal</button>
     <div id="result" class="reveal-text"></div>
     <div id="countdown"></div>
   </div>
 
-  <footer>Crafted with ✨ by KidKed, 2025</footer>
+  <footer>✨ Developed with joy by KidKed, 2025</footer>
+
+  <!-- Optional chime -->
   <audio id="chime" preload="auto">
     <source src="https://github.com/anars/blank-audio/raw/master/1-second-of-silence.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    const reversePairings = {
-      "Icy Bell": "Jemima",
-      "Frosty Comet": "Jathniel",
-      "Sugar Pine": "Malaika",
-      "Winter Whisper": "Valerie",
-      "Snow Echo": "Derrick",
-      "Midnight Ember": "Sylvia",
-      "Northern Glow": "Dianah",
-      "Twinkle Fern": "Daniel",
-      "Silent Star": "Ritah",
-      "Blitzen Flare": "Racheal",
-      "Cinnamon Frost": "Rebecca",
-      "Silver Fir": "Vally",
-      "Star Drift": "Alex",
+    const giftees = {
+      "Crystal Owl": "Ritah",
+      "Icy Bell": "Racheal",
       "Glimmer Birch": "Mom",
-      "Crystal Owl": "Dad"
+      "Winter Whisper": "Daniel",
+      "Midnight Ember": "Jathniel",
+      "Snow Echo": "Rebecca",
+      "Silent Star": "Valerie",
+      "Sugar Pine": "Alex",
+      "Frosty Comet": "Vally",
+      "Northern Glow": "Dianah",
+      "Silver Fir": "Derrick",
+      "Star Drift": "Valerie",
+      "Twinkle Fern": "Malaika",
+      "Blitzen Flare": "Dad",
+      "Cinnamon Frost": "Sylvia"
     };
 
-    function revealRealName() {
-      const codename = document.getElementById("codeSelect").value;
+    function revealGiftee() {
+      const code = document.getElementById("codenameSelect").value;
       const result = document.getElementById("result");
       const chime = document.getElementById("chime");
 
-      if (!codename) return result.innerHTML = "";
+      if (!code) {
+        result.innerHTML = "";
+        return;
+      }
 
-      const already = localStorage.getItem("reveal_" + codename);
-      const realName = reversePairings[codename];
-
-      if (already) {
-        result.innerHTML = `🎁 You are gifting to: <strong>${already}</strong>`;
+      const stored = localStorage.getItem("seen_" + code);
+      if (stored) {
+        result.innerHTML = `🎁 You've already revealed: <strong>${stored}</strong>`;
       } else {
-        result.innerHTML = `🎁 You are gifting to: <strong>${realName}</strong>`;
+        const name = giftees[code];
+        result.innerHTML = `🎁 You are Secret Santa to: <strong>${name}</strong>`;
         chime.play();
-        localStorage.setItem("reveal_" + codename, realName);
+        localStorage.setItem("seen_" + code, name);
       }
     }
 
     // Countdown
     function updateCountdown() {
       const now = new Date();
-      const xmas = new Date("December 25, 2025 00:00:00");
-      const diff = xmas - now;
+      const target = new Date("December 25, 2025 00:00:00");
+      const diff = target - now;
 
       if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "🎁 Merry Christmas!";
+        document.getElementById("countdown").innerHTML = "🎄 Merry Christmas!";
         return;
       }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
 
-      document.getElementById("countdown").innerHTML =
-        `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s until Christmas!`;
+      document.getElementById("countdown").innerHTML = 
+        `⏳ ${d}d ${h}h ${m}m ${s}s until Christmas!`;
     }
+
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
     // Snowfall
     function createSnowflake() {
-      const flake = document.createElement("div");
-      flake.classList.add("snowflake");
-      flake.textContent = "❄️";
-      flake.style.left = Math.random() * 100 + "vw";
-      flake.style.animationDuration = (Math.random() * 3 + 2) + "s";
-      flake.style.fontSize = (Math.random() * 10 + 10) + "px";
-      document.body.appendChild(flake);
-      setTimeout(() => flake.remove(), 5000);
+      const snow = document.createElement("div");
+      snow.classList.add("snowflake");
+      snow.textContent = "❄️";
+      snow.style.left = Math.random() * 100 + "vw";
+      snow.style.fontSize = (Math.random() * 10 + 10) + "px";
+      snow.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(snow);
+      setTimeout(() => snow.remove(), 5000);
     }
+
     setInterval(createSnowflake, 300);
   </script>
-
 </body>
 </html>
