@@ -1,154 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Santa Pairings</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #004d00, #ff3333); /* Green to Red Gradient */
-            color: #fff;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 0 auto;
-            width: 80%;
-            max-width: 600px;
-        }
-
-        h1 {
-            color: #ffcc00;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            margin: 10px;
-            width: 80%;
-            max-width: 300px;
-            border: 2px solid #ffcc00;
-            border-radius: 5px;
-            background: #fff;
-            color: #333;
-        }
-
-        input[type="submit"] {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ffcc00;
-            color: #333;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #e6b800;
-        }
-
-        .result {
-            margin-top: 20px;
-            font-size: 1.5em;
-            color: #00ff00;
-            animation: sparkle 1.5s infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00, 0 0 40px #ffcc00; }
-            50% { text-shadow: 0 0 20px #ffff00, 0 0 30px #ffff00, 0 0 40px #ffff00, 0 0 50px #ffff00; }
-        }
-
-        .error {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #ff6666;
-        }
-
-        .footer {
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: #fff;
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Secret Santa 2025</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #0b1a2a, #1e3c58);
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1608889173600-e79fdd65ef9b');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+    .container {
+      margin-top: 10vh;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+    }
+    select, button {
+      margin: 15px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+    .reveal-text {
+      margin-top: 20px;
+      font-size: 24px;
+      animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer {
+      0% { color: #f0e; }
+      50% { color: #ff0; }
+      100% { color: #f0e; }
+    }
+    footer {
+      margin-top: 30px;
+      color: #ddd;
+    }
+    #countdown {
+      font-size: 18px;
+      color: #fffa;
+      margin-top: 15px;
+    }
+    /* Snowfall */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      font-size: 1em;
+      user-select: none;
+      z-index: 9999;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Secret Santa Pairings</h1>
-        <form id="santaForm">
-            <label for="flavor">Enter your flavor (anonymous name):</label><br>
-            <input type="text" id="flavor" name="flavor" required><br>
-            <input type="submit" value="Find Secret Santa">
-        </form>
-        <div class="result" id="result"></div>
-        <div class="error" id="error"></div>
-    </div>
+  <div class="container">
+    <h1>✨ Secret Santa 2025 ✨</h1>
+    <p>Select your name to reveal who you're gifting!</p>
+    <select id="nameSelect">
+      <option value="">-- Choose Your Name --</option>
+      <option value="Jemima">Jemima</option>
+      <option value="Jathniel">Jathniel</option>
+      <option value="Malaika">Malaika</option>
+      <option value="Valerie">Valerie</option>
+      <option value="Derrick">Derrick</option>
+      <option value="Sylvia">Sylvia</option>
+      <option value="Dianah">Dianah</option>
+      <option value="Daniel">Daniel</option>
+      <option value="Ritah">Ritah</option>
+      <option value="Racheal">Racheal</option>
+      <option value="Rebecca">Rebecca</option>
+      <option value="Vally">Vally</option>
+      <option value="Alex">Alex</option>
+      <option value="Mom">Mom</option>
+      <option value="Dad">Dad</option>
+    </select>
+    <button onclick="revealGiftee()">Reveal My Giftee</button>
+    <div id="result" class="reveal-text"></div>
+    <div id="countdown"></div>
+  </div>
 
-    <div class="footer">
-        Developed by KidKed
-    </div>
+  <footer>Crafted with ✨ by KidKed, 2025</footer>
 
-    <script>
-        // Mapping of anonymous names (flavors) to real usernames
-        const flavorToUsername = {
-            "Vanilla": "Beck",
-            "Chocolate": "Dan",
-            "Strawberry": "Derrick",
-            "Mint": "Sylvia",
-            "Caramel": "Rita",
-            "Lemon": "Racheal",
-            "Coffee": "Alex",
-            "Hazelnut": "Vally",
-            "Blueberry": "Mom",
-            "Peanut Butter": "Dad",
-            "Pistachio": "Diana"
-        };
+  <!-- Sound Effect -->
+  <audio id="chime" preload="auto">
+    <source src="https://github.com/anars/blank-audio/raw/master/1-second-of-silence.mp3" type="audio/mpeg">
+  </audio>
 
-        // Mapping of real usernames to their Secret Santa assignments
-        const pairings = {
-            "Beck": "Dianah",
-            "Dan": "Derrick",
-            "Derrick": "Alex",
-            "Sylvia": "Becky",
-            "Rita": "Racheal",
-            "Racheal": "Ritah",
-            "Alex": "Mom",
-            "Vally": "Sylvia",
-            "Mom": "Vally",
-            "Dad": "Dan",
-            "Diana": "Dad"
-        };
+  <script>
+    const pairings = {
+      "Jemima": "Icy Bell",
+      "Jathniel": "Frosty Comet",
+      "Malaika": "Sugar Pine",
+      "Valerie": "Winter Whisper",
+      "Derrick": "Snow Echo",
+      "Sylvia": "Midnight Ember",
+      "Dianah": "Northern Glow",
+      "Daniel": "Twinkle Fern",
+      "Ritah": "Silent Star",
+      "Racheal": "Blitzen Flare",
+      "Rebecca": "Cinnamon Frost",
+      "Vally": "Silver Fir",
+      "Alex": "Star Drift",
+      "Mom": "Glimmer Birch",
+      "Dad": "Crystal Owl"
+    };
 
-        document.getElementById('santaForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const flavor = document.getElementById('flavor').value.trim();
-            const resultDiv = document.getElementById('result');
-            const errorDiv = document.getElementById('error');
-            resultDiv.innerHTML = '';
-            errorDiv.innerHTML = '';
+    function revealGiftee() {
+      const name = document.getElementById("nameSelect").value;
+      const result = document.getElementById("result");
+      const chime = document.getElementById("chime");
 
-            if (flavorToUsername[flavor]) {
-                const realUsername = flavorToUsername[flavor];
-                const secretSanta = pairings[realUsername];
-                resultDiv.innerHTML = `You are Secret Santa to: ${secretSanta}`;
-            } else {
-                errorDiv.innerHTML = 'Flavor not found. Please try again.';
-            }
-        });
-    </script>
+      if (!name) {
+        result.innerHTML = "";
+        return;
+      }
+
+      const alreadySeen = localStorage.getItem("santa_" + name);
+      if (alreadySeen) {
+        result.innerHTML = `🎁 You already revealed your giftee: <strong>${alreadySeen}</strong>`;
+      } else {
+        const codename = pairings[name];
+        result.innerHTML = `🎁 You are Secret Santa to: <strong>${codename}</strong>`;
+        chime.play();
+        localStorage.setItem("santa_" + name, codename);
+      }
+    }
+
+    // 🎄 Countdown Timer
+    function updateCountdown() {
+      const now = new Date();
+      const xmas = new Date("December 25, 2025 00:00:00");
+      const diff = xmas - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "🎄 Merry Christmas!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").innerHTML =
+        `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s until Christmas!`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // ❄️ Snow Generator
+    function createSnowflake() {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄️";
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      snowflake.style.fontSize = (Math.random() * 10 + 10) + "px";
+      document.body.appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 5000);
+    }
+
+    setInterval(createSnowflake, 300);
+  </script>
 </body>
 </html>
