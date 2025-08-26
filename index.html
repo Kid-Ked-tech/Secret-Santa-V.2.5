@@ -18,81 +18,51 @@
       text-align: center;
       overflow-x: hidden;
     }
-
     .container {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0,0,0,0.6);
       padding: 30px;
       border-radius: 15px;
       width: 90%;
       max-width: 500px;
     }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 5px;
-    }
-
+    h1 { font-size: 2.5rem; margin-bottom: 5px; }
     .dress-code {
       font-size: 1rem;
       margin: 10px 0 20px;
       color: #ffe6e6;
       line-height: 1.6;
     }
-
-    select, button {
+    input, button {
       margin: 15px;
       padding: 12px;
       font-size: 16px;
       border-radius: 8px;
       border: none;
     }
-
+    input { width: 70%; text-align: center; }
     button {
       background-color: #ffd700;
       color: #000;
       font-weight: bold;
       cursor: pointer;
     }
-
     .reveal-text {
       margin-top: 20px;
       font-size: 24px;
       animation: shimmer 2s infinite;
     }
-
     @keyframes shimmer {
       0% { color: #ffebcd; }
       50% { color: #fff700; }
       100% { color: #ffebcd; }
     }
-
-    footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #ccc;
-    }
-
-    #countdown {
-      margin-top: 10px;
-      font-size: 16px;
-      color: #ffffffb3;
-    }
-
+    footer { margin-top: 30px; font-size: 14px; color: #ccc; }
+    #countdown { margin-top: 10px; font-size: 16px; color: #ffffffb3; }
     .snowflake {
-      position: fixed;
-      top: -10px;
-      font-size: 1em;
-      color: #fff;
-      user-select: none;
-      animation: fall linear infinite;
-      z-index: 999;
+      position: fixed; top: -10px; font-size: 1em; color: #fff;
+      user-select: none; animation: fall linear infinite; z-index: 999;
     }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-      }
-    }
+    @keyframes fall { to { transform: translateY(100vh); } }
   </style>
 </head>
 <body>
@@ -102,32 +72,13 @@
       <strong>By Derr1ckEmma</strong><br><br>
       <strong>Dress Code:</strong><br>
       Black as the main lead,<br>
-      and add either <span style="color: #ff6666;">Red</span>, 
-      <span style="color: #ffe066;">Yellow</span>, or 
-      <span style="color: #ffb6c1;">Peach</span>.
+      with <span style="color:#ff6666;">Red</span>, 
+      <span style="color:#ffe066;">Yellow</span>, or 
+      <span style="color:#ffb6c1;">Peach</span>.
     </div>
 
-    <p>Select your <strong>codename</strong> to reveal who you're gifting to:</p>
-
-    <select id="codenameSelect">
-      <option value="">-- Choose Your Codename --</option>
-      <option value="Crystal Owl">Crystal Owl</option>
-      <option value="Icy Bell">Icy Bell</option>
-      <option value="Glimmer Birch">Glimmer Birch</option>
-      <option value="Winter Whisper">Winter Whisper</option>
-      <option value="Midnight Ember">Midnight Ember</option>
-      <option value="Snow Echo">Snow Echo</option>
-      <option value="Silent Star">Silent Star</option>
-      <option value="Sugar Pine">Sugar Pine</option>
-      <option value="Frosty Comet">Frosty Comet</option>
-      <option value="Northern Glow">Northern Glow</option>
-      <option value="Silver Fir">Silver Fir</option>
-      <option value="Star Drift">Star Drift</option>
-      <option value="Twinkle Fern">Twinkle Fern</option>
-      <option value="Blitzen Flare">Blitzen Flare</option>
-      <option value="Cinnamon Frost">Cinnamon Frost</option>
-    </select>
-
+    <p>Enter your codename (lowercase, no spaces):</p>
+    <input type="text" id="codeInput" placeholder="e.g. silentstar">
     <button onclick="revealGiftee()">Reveal</button>
     <div id="result" class="reveal-text"></div>
     <div id="countdown"></div>
@@ -135,47 +86,35 @@
 
   <footer>✨ Made with love by Derr1ckEmma</footer>
 
-  <audio id="chime" preload="auto">
-    <source src="https://github.com/anars/blank-audio/raw/master/1-second-of-silence.mp3" type="audio/mpeg">
-  </audio>
-
   <script>
+    // Codename-to-giftee mapping
     const giftees = {
-      "Crystal Owl": "Ritah",
-      "Icy Bell": "Racheal",
-      "Glimmer Birch": "Mom",
-      "Winter Whisper": "Daniel",
-      "Midnight Ember": "Jathniel",
-      "Snow Echo": "Rebecca",
-      "Silent Star": "Valerie",
-      "Sugar Pine": "Alex",
-      "Frosty Comet": "Vally",
-      "Northern Glow": "Dianah",
-      "Silver Fir": "Derrick",
-      "Star Drift": "Valerie",
-      "Twinkle Fern": "Malaika",
-      "Blitzen Flare": "Dad",
-      "Cinnamon Frost": "Sylvia"
+      "silentstar": "Sylvia",         
+      "midnightember": "Vally",       
+      "twinklefern": "Alex",          
+      "stardrift": "Daniel",          
+      "silverfir": "Ritah",           
+      "cinnamonfrost": "Racheal",     
+      "northernglow": "Mom",          
+      "winterwhisper": "Malaika",     
+      "crystalowl": "Rebecca",        
+      "icybell": "Jathniel",          
+      "snowecho": "Jemimah",          
+      "frostycomet": "Dad",           
+      "sugarpine": "Valerie",         
+      "glimmerbirch": "Dianah",       
+      "blitzenflare": "Derrick"       
     };
 
     function revealGiftee() {
-      const code = document.getElementById("codenameSelect").value;
+      const input = document.getElementById("codeInput").value.toLowerCase().replace(/\s+/g, '');
       const result = document.getElementById("result");
-      const chime = document.getElementById("chime");
 
-      if (!code) {
-        result.innerHTML = "";
-        return;
-      }
-
-      const stored = localStorage.getItem("seen_" + code);
-      if (stored) {
-        result.innerHTML = `🎁 You've already revealed: <strong>${stored}</strong>`;
-      } else {
-        const name = giftees[code];
+      if (giftees[input]) {
+        const name = giftees[input];
         result.innerHTML = `🎁 You are Secret Santa to: <strong>${name}</strong>`;
-        chime.play();
-        localStorage.setItem("seen_" + code, name);
+      } else {
+        result.innerHTML = "⛔ Please enter your codename in small letters with no space.";
       }
     }
 
@@ -184,21 +123,17 @@
       const now = new Date();
       const target = new Date("December 25, 2025 00:00:00");
       const diff = target - now;
-
       if (diff <= 0) {
         document.getElementById("countdown").innerHTML = "🎄 Merry Christmas!";
         return;
       }
-
       const d = Math.floor(diff / (1000 * 60 * 60 * 24));
       const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const m = Math.floor((diff / (1000 * 60)) % 60);
       const s = Math.floor((diff / 1000) % 60);
-
       document.getElementById("countdown").innerHTML = 
         `⏳ ${d}d ${h}h ${m}m ${s}s until Christmas!`;
     }
-
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
@@ -213,7 +148,6 @@
       document.body.appendChild(snow);
       setTimeout(() => snow.remove(), 5000);
     }
-
     setInterval(createSnowflake, 300);
   </script>
 </body>
