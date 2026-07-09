@@ -1,154 +1,673 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Secret Santa 2025</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: radial-gradient(circle at top left, #d7373f, #740404);
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow-x: hidden;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DerrickEmma's Christmas Secret Exchange 2026 🎄</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:"Segoe UI",sans-serif;
+    background:
+    radial-gradient(circle at top,#8b0000,#120000 75%);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+
+/* Christmas lights */
+body:before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:14px;
+    background:
+    repeating-linear-gradient(
+    90deg,
+    red 0 30px,
+    gold 30px 60px,
+    green 60px 90px
+    );
+    box-shadow:0 0 25px gold;
+    animation:blink 2s infinite;
+}
+
+
+@keyframes blink{
+    50%{
+        filter:brightness(2);
     }
-    .container {
-      background: rgba(0,0,0,0.6);
-      padding: 30px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 500px;
-    }
-    h1 { font-size: 2.5rem; margin-bottom: 5px; }
-    .dress-code {
-      font-size: 1rem;
-      margin: 10px 0 20px;
-      color: #ffe6e6;
-      line-height: 1.6;
-    }
-    input, button {
-      margin: 15px;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-    }
-    input { width: 70%; text-align: center; }
-    button {
-      background-color: #ffd700;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .reveal-text {
-      margin-top: 20px;
-      font-size: 24px;
-      animation: shimmer 2s infinite;
-    }
-    @keyframes shimmer {
-      0% { color: #ffebcd; }
-      50% { color: #fff700; }
-      100% { color: #ffebcd; }
-    }
-    footer { margin-top: 30px; font-size: 14px; color: #ccc; }
-    #countdown { margin-top: 10px; font-size: 16px; color: #ffffffb3; }
-    .snowflake {
-      position: fixed; top: -10px; font-size: 1em; color: #fff;
-      user-select: none; animation: fall linear infinite; z-index: 999;
-    }
-    @keyframes fall { to { transform: translateY(100vh); } }
-  </style>
+}
+
+
+.container{
+
+    width:90%;
+    max-width:520px;
+
+    background:
+    rgba(0,0,0,.65);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:25px;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    border:
+    1px solid rgba(255,215,0,.5);
+
+    box-shadow:
+    0 0 40px rgba(255,215,0,.25);
+
+    animation:
+    entrance 1.5s ease;
+
+}
+
+
+@keyframes entrance{
+
+from{
+opacity:0;
+transform:translateY(50px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+
+h1{
+
+font-size:2.2rem;
+
+color:#ffd700;
+
+text-shadow:
+0 0 15px gold;
+
+margin-bottom:10px;
+
+}
+
+
+.subtitle{
+
+font-size:15px;
+
+line-height:1.6;
+
+color:#eee;
+
+}
+
+
+.dress{
+
+margin:25px 0;
+
+padding:18px;
+
+background:
+rgba(255,255,255,.08);
+
+border-radius:15px;
+
+line-height:1.8;
+
+font-size:14px;
+
+}
+
+
+input{
+
+width:85%;
+
+padding:15px;
+
+border-radius:30px;
+
+border:none;
+
+outline:none;
+
+text-align:center;
+
+font-size:16px;
+
+margin-top:10px;
+
+}
+
+
+button{
+
+margin-top:20px;
+
+padding:15px 35px;
+
+border:none;
+
+border-radius:30px;
+
+background:
+linear-gradient(45deg,#ffd700,#fff1a3);
+
+font-weight:bold;
+
+font-size:16px;
+
+cursor:pointer;
+
+box-shadow:
+0 0 20px gold;
+
+transition:.3s;
+
+}
+
+
+button:hover{
+
+transform:scale(1.08);
+
+}
+
+
+
+.gift{
+
+font-size:75px;
+
+margin:25px;
+
+animation:
+bounce 2s infinite;
+
+}
+
+
+@keyframes bounce{
+
+50%{
+transform:translateY(-15px);
+}
+
+}
+
+
+.result{
+
+display:none;
+
+margin-top:20px;
+
+font-size:24px;
+
+color:#ffd700;
+
+animation:
+reveal 1s;
+
+}
+
+
+@keyframes reveal{
+
+from{
+opacity:0;
+transform:scale(.3);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+
+.countdown{
+
+margin-top:20px;
+
+color:#ddd;
+
+font-size:14px;
+
+}
+
+
+
+footer{
+
+position:fixed;
+
+bottom:15px;
+
+font-size:13px;
+
+color:#bbb;
+
+}
+
+
+
+/* Snow */
+
+.snow{
+
+position:fixed;
+
+top:-30px;
+
+z-index:-1;
+
+animation:
+snowfall linear forwards;
+
+}
+
+
+@keyframes snowfall{
+
+to{
+transform:translateY(110vh);
+}
+
+}
+
+
+
+</style>
+
 </head>
+
+
 <body>
-  <div class="container">
-    <h1>🎄 Secret Santa 2025 🎁</h1>
-    <div class="dress-code">
-      <strong>By DerrickEmma</strong><br><br>
-      <strong>Dress Code:</strong><br>
-      Black as the main lead,<br>
-      with <span style="color:#ff6666;">Red</span>, 
-      <span style="color:#ffe066;">Yellow</span>, or 
-      <span style="color:#ffb6c1;">Peach</span>.
-    </div>
 
-    <p>Enter your codename (lowercase, no spaces):</p>
-    <input type="text" id="codeInput" placeholder="e.g. christmaseve">
-    <button onclick="revealGiftee()">Reveal</button>
-    <div id="result" class="reveal-text"></div>
-    <div id="countdown"></div>
-  </div>
 
-  <footer>✨ Made with love by DerrickEmma</footer>
+<div class="container">
 
-  <script>
-    // Codename-to-giftee mapping
-    const giftees = {
-      "silentstar": "Sylvia",         
-      "midnightember": "Vally",       
-      "twinklefern": "Alex",          
-      "stardrift": "Daniel",          
-      "silverfir": "Ritah",           
-      "cinnamonfrost": "Racheal",     
-      "northernglow": "Mom",          
-      "winterwhisper": "Malaika",     
-      "crystalowl": "Rebecca",        
-      "icybell": "Jathniel",          
-      "snowecho": "Jemimah",          
-      "frostycomet": "Dad",           
-      "sugarpine": "Valerie",         
-      "glimmerbirch": "Dianah",       
-      "blitzenflare": "Derrick"       
-    };
 
-    function revealGiftee() {
-      const input = document.getElementById("codeInput").value.toLowerCase().replace(/\s+/g, '');
-      const result = document.getElementById("result");
+<h1>
+🎄 Secret Santa 2026 🎁
+</h1>
 
-      if (giftees[input]) {
-        const name = giftees[input];
-        result.innerHTML = `🎁 You are Secret Santa to: <strong>${name}</strong>`;
-      } else {
-        result.innerHTML = "⛔ Please enter your codename in small letters with no space.";
-      }
+
+<div class="subtitle">
+
+A magical Christmas surprise<br>
+
+Created by <b>DerrickEmma</b>
+
+</div>
+
+
+
+<div class="dress">
+
+<strong>Dress Code</strong><br>
+
+🖤 Black as the main theme<br>
+
+❤️ Red accents<br>
+
+💛 Yellow highlights<br>
+
+🌸 Peach details
+
+</div>
+
+
+
+<p>
+Enter your secret codename
+</p>
+
+
+
+<input 
+id="codeInput"
+placeholder="example: auroracrown"
+autocomplete="off"
+>
+
+
+<br>
+
+
+<button onclick="openGift()">
+🎁 Open Gift
+</button>
+
+<script>
+
+/*
+ Secret Santa 2026
+ Codename -> Recipient
+
+ Update this section if you change assignments
+*/
+
+const giftees = {
+
+    "auroracrown": "Jathniel",
+
+    "hollyecho": "Mom",
+
+    "moonpine": "Alex",
+
+    "emberhaven": "Rebecca",
+
+    "crystalmist": "Valerie",
+
+    "velvetfir": "Derrick",
+
+    "frostsparrow": "Racheal",
+
+    "northlantern": "Sylvia",
+
+    "winterbloom": "Daniel",
+
+    "sugaraurora": "Malaika",
+
+    "evergreenwolf": "Dad",
+
+    "stargarland": "Jemimah",
+
+    "icydahlia": "Ritah",
+
+    "snowfallfox": "Vally",
+
+    "mistletoemoon": "Dianah"
+
+};
+
+
+
+/* Gift reveal */
+
+function openGift(){
+
+    const input =
+    document
+    .getElementById("codeInput")
+    .value
+    .toLowerCase()
+    .replace(/\s+/g,'');
+
+
+    const result =
+    document.getElementById("result");
+
+
+    const gift =
+    document.getElementById("gift");
+
+
+
+    if(giftees[input]){
+
+
+        gift.innerHTML="✨🎁✨";
+
+
+        setTimeout(()=>{
+
+
+            result.style.display="block";
+
+
+            result.innerHTML=
+            `
+            🎉 Surprise! 🎉
+            <br><br>
+            You are Secret Santa to:
+            <br><br>
+            <strong>
+            ${giftees[input]}
+            </strong>
+            `;
+
+
+            celebrate();
+
+
+        },800);
+
+
+
+    }else{
+
+
+        result.style.display="block";
+
+        result.style.color="#ff8080";
+
+        result.innerHTML=
+        `
+        ❌ Invalid codename
+        <br><br>
+        Enter your codename using lowercase letters.
+        `;
+
+
     }
 
-    // Countdown
-    function updateCountdown() {
-      const now = new Date();
-      const target = new Date("December 25, 2025 00:00:00");
-      const diff = target - now;
-      if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "🎄 Merry Christmas!";
+}
+
+
+
+/* Snow animation */
+
+function createSnow(){
+
+    const snow =
+    document.createElement("div");
+
+
+    snow.className="snow";
+
+    snow.innerHTML="❄️";
+
+
+    snow.style.left=
+    Math.random()*100+"vw";
+
+
+    snow.style.fontSize=
+    (Math.random()*20+10)+"px";
+
+
+    snow.style.animationDuration=
+    (Math.random()*5+3)+"s";
+
+
+    document.body.appendChild(snow);
+
+
+
+    setTimeout(()=>{
+
+        snow.remove();
+
+    },8000);
+
+}
+
+
+setInterval(createSnow,250);
+
+
+
+
+/* Countdown */
+
+function updateCountdown(){
+
+    const christmas =
+    new Date("December 25, 2026 00:00:00")
+    .getTime();
+
+
+    const now =
+    new Date().getTime();
+
+
+    const distance =
+    christmas-now;
+
+
+    const box =
+    document.getElementById("countdown");
+
+
+    if(distance<=0){
+
+        box.innerHTML=
+        "🎄 Merry Christmas! 🎄";
+
         return;
-      }
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-      document.getElementById("countdown").innerHTML = 
-        `⏳ ${d}d ${h}h ${m}m ${s}s until Christmas!`;
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
 
-    // Snowfall
-    function createSnowflake() {
-      const snow = document.createElement("div");
-      snow.classList.add("snowflake");
-      snow.textContent = "❄️";
-      snow.style.left = Math.random() * 100 + "vw";
-      snow.style.fontSize = (Math.random() * 10 + 10) + "px";
-      snow.style.animationDuration = (Math.random() * 3 + 2) + "s";
-      document.body.appendChild(snow);
-      setTimeout(() => snow.remove(), 5000);
     }
-    setInterval(createSnowflake, 300);
-  </script>
+
+
+    const days =
+    Math.floor(
+    distance/(1000*60*60*24)
+    );
+
+
+    const hours =
+    Math.floor(
+    (distance%(1000*60*60*24))
+    /(1000*60*60)
+    );
+
+
+    const minutes =
+    Math.floor(
+    (distance%(1000*60*60))
+    /(1000*60)
+    );
+
+
+    const seconds =
+    Math.floor(
+    (distance%(1000*60))/1000
+    );
+
+
+    box.innerHTML=
+    `⏳ ${days} days ${hours}h ${minutes}m ${seconds}s until Christmas 🎄`;
+
+}
+
+
+setInterval(updateCountdown,1000);
+
+updateCountdown();
+
+
+
+
+/* Celebration effect */
+
+function celebrate(){
+
+    for(let i=0;i<70;i++){
+
+        const star =
+        document.createElement("div");
+
+
+        star.innerHTML=
+        ["🎉","✨","⭐","🎄"][
+
+        Math.floor(Math.random()*4)
+
+        ];
+
+
+        star.style.position="fixed";
+
+        star.style.left=
+        Math.random()*100+"vw";
+
+
+        star.style.top="-20px";
+
+
+        star.style.fontSize=
+        (Math.random()*20+10)+"px";
+
+
+        star.style.animation=
+        "snowfall "+
+
+        (Math.random()*3+2)
+
+        +"s linear";
+
+
+        document.body.appendChild(star);
+
+
+
+        setTimeout(()=>{
+
+            star.remove();
+
+        },5000);
+
+    }
+
+}
+
+
+</script>
+
+
 </body>
 </html>
+
+<div class="gift" id="gift">
+🎁
+</div>
+
+
+
+<div class="result" id="result"></div>
+
+
+
+<div class="countdown" id="countdown"></div>
+
+
+</div>
+
+
+<footer>
+✨ Made with love by DerrickEmma ✨
+</footer>
